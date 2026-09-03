@@ -1,0 +1,21 @@
+Measurement Protocol
+Experiment Name: Sensor 0 Calibration
+Batch Number: XL004
+Start Time: 2026-04-21T10:38:26.888558
+
+Sensors:
+
+DeviceManager Devices:
+- Name: SpectralSensor 0
+  Class: SpectralSensor
+  Connected: True
+  Timeline Band: Band 9 (640 nm)
+  ATIME: 0
+  ASTEP: 8993
+  GAIN: 1
+  IRMAIN: 25
+  IROPP: 25
+  VISM: 255
+  VISLR: 255
+
+

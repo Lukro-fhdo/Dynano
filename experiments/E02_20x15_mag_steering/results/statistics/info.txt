@@ -1,0 +1,13 @@
+REPLICATE STATISTICS
+====================
+Sensor mapping: 1001 = upstream / Outlet A; 1000 = downstream / Outlet B; 1002 = reference.
+Outlet is not a grouping variable because it is fixed by sensor identity.
+replicate_metrics.csv: one row per injection/replicate and sensor
+replicate_summary.csv: mean, standard deviation and n per condition and sensor
+replicate_mean_curves.csv: interpolated mean and SD curves
+Curve grid: 0.25 s
+Analysis window: 0 to 60 s
+Peak: maximum baseline-corrected absolute absorption
+Positive integral: trapezoidal integral after clipping negative values to zero
+Groups: injection volume, injection rate, magnet state and sensor
+Interpolation is used only for replicate mean curves, not for exported sample CSVs.

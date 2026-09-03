@@ -1,0 +1,23 @@
+99,11406248,STEP_1: Start sensor (upstream, downstream, reference)
+99,11406537,STEP_2: Move robot to C20_full_off @ 1.0
+99,11409855,STEP_3: Start peristaltic (10.0 ml/min)
+99,11412204,STEP_4: Wait (20 min Sensor warm up)
+99,12652479,STEP_5: Warte auf Continue (prepare 100% ref shot)
+99,12671755,STEP_6: Inject syringe 200.0 ul @ 10.0 ul/min
+99,12672750,STEP_7: Warte auf Continue (Reference no Magnet)
+99,12862433,STEP_8: Inject syringe 50.0 ul @ 10.0 ul/min
+99,12956988,STEP_9: Inject syringe 50.0 ul @ 10.0 ul/min
+99,13052072,STEP_10: Inject syringe 50.0 ul @ 10.0 ul/min
+99,13146625,STEP_11: Move robot to C20_on @ 1.0
+99,13149977,STEP_12: Warte auf Continue (C20x15 Magnet on)
+99,13190745,STEP_13: Inject syringe 50.0 ul @ 10.0 ul/min
+99,13285338,STEP_14: Inject syringe 50.0 ul @ 10.0 ul/min
+99,13380111,STEP_15: Inject syringe 50.0 ul @ 10.0 ul/min
+99,13475141,STEP_16: Inject syringe 100.0 ul @ 10.0 ul/min
+99,13569967,STEP_17: Inject syringe 100.0 ul @ 10.0 ul/min
+99,13664966,STEP_18: Inject syringe 100.0 ul @ 10.0 ul/min
+99,13759671,STEP_19: Inject syringe 150.0 ul @ 10.0 ul/min
+99,13854763,STEP_20: Inject syringe 150.0 ul @ 10.0 ul/min
+99,13949443,STEP_21: Inject syringe 150.0 ul @ 10.0 ul/min
+99,14043975,STEP_22: Warte auf Continue (fully flush tubing)
+99,14221450,STEP_23: Stop all devices
