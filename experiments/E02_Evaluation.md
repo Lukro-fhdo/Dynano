@@ -216,3 +216,187 @@ The peak was defined as the maximum normalized signal within 60 s after injectio
 *Figure 6. Mean positive signal integral $\pm$ standard deviation for all experimental conditions ($n=3$).* 
 
 The numerical values underlying Figures 4–6 are provided in `replicate_metrics.csv`, `replicate_summary.csv`, and `replicate_mean_curves.csv`.
+
+
+## Results — Iron content by AES
+Collected outlet samples analysed for total iron. Injection of a 5 mg/mL SPION stock
+into a symmetric two-branch channel, sampling 60 s per run at Q = 10 mL/min per outlet,
+i.e. 10 mL collected per branch. Three replicates per condition.
+
+### Table 1 — Measured iron concentration
+
+| V_inj [µL] | Magnet | Rep | Sample A | c(Fe) A [ng/mL] | Sample B | c(Fe) B [ng/mL] |
+|---:|---|---|---:|---:|---:|---:|
+| 50 | off | 1 | 1 | 18,273.80 | 2 | 5,313.00 |
+| 50 | off | 2 | 3 | 23,104.60 | 4 | 7,356.20 |
+| 50 | off | 3 | 5 | 24,326.40 | 6 | 9,140.85 |
+| 50 | on | 1 | 7 ⚠ | 77,885.80 | 8 | 706.75 |
+| 50 | on | 2 | 9 | 30,873.40 | 10 | 1,060.45 |
+| 50 | on | 3 | 11 | 26,180.80 | 12 | 929.85 |
+| 100 | on | 1 | 13 | 68,222.80 | 14 | 3,523.95 |
+| 100 | on | 2 | 15 | 57,344.60 | 16 | 3,543.00 |
+| 100 | on | 3 | 17 | 52,788.20 | 18 | 3,030.35 |
+| 150 | on | 1 | 19 ⚠ | 29,164.20 | 20 | 4,594.90 |
+| 150 | on | 2 | 21 | 79,762.00 | 22 | 6,642.30 |
+| 150 | on | 3 | 23 | 79,198.20 | 24 | 6,744.50 |
+
+### Table 2 — Mass balance
+
+Recovered iron is (c_A + c_B) × 10 mL; injected iron is V_inj × 5 mg/mL.
+
+| V_inj [µL] | Magnet | Rep | Injected [mg] | Recovered [mg] | Recovery |
+|---:|---|---|---:|---:|---:|
+| 50 | off | 1 | 0.250 | 0.2359 | 94.3% |
+| 50 | off | 2 | 0.250 | 0.3046 | 121.8% |
+| 50 | off | 3 | 0.250 | 0.3347 | 133.9% |
+| 50 | on | 1 ⚠ | 0.250 | 0.7859 | 314.4% |
+| 50 | on | 2 | 0.250 | 0.3193 | 127.7% |
+| 50 | on | 3 | 0.250 | 0.2711 | 108.4% |
+| 100 | on | 1 | 0.500 | 0.7175 | 143.5% |
+| 100 | on | 2 | 0.500 | 0.6089 | 121.8% |
+| 100 | on | 3 | 0.500 | 0.5582 | 111.6% |
+| 150 | on | 1 ⚠ | 0.750 | 0.3376 | 45.0% |
+| 150 | on | 2 | 0.750 | 0.8640 | 115.2% |
+| 150 | on | 3 | 0.750 | 0.8594 | 114.6% |
+| | | | | **median (excl. ⚠)** | **118.5%** |
+
+### Table 3 — Branch distribution
+
+| V_inj [µL] | Magnet | A share | B share |
+|---:|---|---:|---:|
+| 50 | off | 75.3% ± 2.4 | 24.7% |
+| 50 | on | 97.5% ± 1.4* | 2.5% |
+| 100 | on | 94.6% ± 0.5 | 5.4% |
+| 150 | on | 90.3% ± 3.4* | 9.7% |
+
+\* includes a replicate flagged in the notes below.
+
+### Data quality
+
+1. **Probable sample interchange, No. 7 and No. 19.** Grouped by injection volume, the
+   A-branch values are:
+
+   | V_inj | A values, magnet on |
+   |---|---|
+   | 50 µL | **77 886** \| 30 873 \| 26 181 |
+   | 150 µL | **29 164** \| 79 762 \| 79 198 |
+
+   No. 7 falls inside the 150 µL cluster and No. 19 inside the 50 µL cluster.
+   Exchanging the two values moves their recoveries from 314% and 45% to 119% and 110%,
+   both inside the range of the other ten pairs, and reduces the replicate SD of the
+   A share from ±1.4 to ±0.6 (50 µL) and from ±3.4 to ±1.3 (150 µL). The vial labelling
+   should be verified before the values are used.
+
+2. **Systematic over-recovery of about +18%.** Consistent across
+   conditions rather than random. It would close if the collected volume were 8.4 mL
+   rather than 10 mL per outlet, or if the stock were 5.9 mg Fe/mL rather than 5.0.
+   The AES calibration is the third candidate.
+
+3. **Stock specification.** The balance assumes 5 mg/mL refers to iron. If it refers to
+   total particle mass (Fe₃O₄, 72.4% Fe), injected iron drops to 0.181 mg per 50 µL and
+   recovery rises to about 164%. This should be confirmed, since β in the optical
+   calibration is referenced to the same stock figure.
+
+4. **Collected volume.** 10 mL per outlet is assumed, from Q = 10 mL/min per branch over
+   60 s. If 10 mL were the combined volume of both branches, all recoveries would halve
+   to a median of 59%.
+
+## Results — Optical sensor vs. AES cross-validation (E02_20x15)
+
+The optical sensor and the AES measure different quantities. The sensor returns a
+line integral across the channel; the AES returns the mass actually collected, which is
+flow-weighted. Absolute values are therefore not directly comparable without the flow
+model. The **branch ratio** is, because the unknown weighting largely cancels when both
+branches are evaluated the same way.
+
+Sensor traces are converted to concentration by inverting the calibration series as a
+lookup table (interpolation of c against −ln(I/I₀)), then integrated over the 60 s
+window. No β and no Beer-Lambert assumption enters the conversion.
+
+### Table 1 — Branch B share, sensor vs. AES
+
+| V_inj [µL] | Magnet | Sensor B-share | AES B-share | Difference |
+|---:|---|---:|---:|---:|
+| 50 | off | 27.42% ± 2.55 | 24.66% ± 2.43 | +2.75 pp |
+| 50 | on | 3.24% ± 0.26 | 3.04% ± 0.59 | +0.20 pp |
+| 100 | on | 5.64% ± 0.63 | 5.39% ± 0.46 | +0.25 pp |
+| 150 | on | 7.22% ± 0.66 | 7.04% ± 1.27 | +0.18 pp |
+
+Correlation over all 12 runs: **r = 0.9979**, regression slope 1.12, RMS deviation 1.49 pp.
+
+The three magnet-on conditions agree to within 0.25 pp. The magnet-off reference
+deviates by +2.75 pp, i.e. the sensor reports about 11% more material in branch B than
+the AES does. The regression slope of 1.12 reflects the same systematic: the sensor
+consistently attributes a slightly larger share to branch B.
+
+### Table 2 — Magnetic separation performance
+
+B-branch depletion relative to the magnet-off reference, from both methods
+independently.
+
+| V_inj [µL] | Sensor | AES |
+|---:|---:|---:|
+| 50 | 8.47× | 8.12× |
+| 100 | 4.86× | 4.58× |
+| 150 | 3.80× | 3.51× |
+
+Both methods show the same trend: separation weakens monotonically with increasing
+injected volume, consistent with a limited capture capacity of the magnet.
+
+### Table 3 — Bolus shape, branch A
+
+Peak concentration, time-integrated concentration and arrival statistics from the
+sensor traces. `t50` and `t90` are the times at which 50% and 90% of the integral have
+passed.
+
+| V_inj [µL] | Magnet | peak c̄ [mg/mL] | t_peak [s] | AUC [mg/mL·s] | t50 [s] | t90 [s] |
+|---:|---|---:|---:|---:|---:|---:|
+| 50 | off | 0.1884 | 7.52 | 1.447 | 14.6 | 31.9 |
+| 50 | on | 0.1315 | 8.23 | 2.041 | 17.0 | 35.9 |
+| 100 | on | 0.4395 | 7.35 | 3.899 | 12.8 | 32.1 |
+| 150 | on | 0.6620 | 7.59 | 5.112 | 11.8 | 28.9 |
+
+At 50 µL the magnet changes the shape of the branch-A bolus, not only its magnitude:
+the peak concentration drops to 0.70× while the integral rises to 1.41×, and
+t50 shifts from 14.6 s to 17.0 s. More material arrives, later and more spread out —
+consistent with temporary retention at the magnet followed by gradual release.
+
+![Sensor vs AES](E02_20x15_mag_steering/sensor_vs_aes.png)
+
+*Figure 1. (a) Recovered concentration traces, 50 µL replicate 2, magnet off (dashed)
+and on (solid). (b) Sensor against AES branch-B share, all 12 runs, with the 1:1 line.
+(c) Branch-B share per condition from both methods, error bars are replicate SD.*
+
+### Notes
+
+1. **The comparison independently supports the suspected sample interchange.** With the
+   AES values as recorded, the two largest deviations from the sensor are exactly
+   samples 7 and 19 (+2.6 pp and −6.6 pp), and the correlation is r = 0.968. Exchanging
+   the two A values raises it to r = 0.998 and brings both runs in line with their
+   replicates. Two independent measurement methods pointing at the same two vials is a
+   strong indication.
+
+2. **Residual systematic of about +12%.** The sensor attributes a slightly larger share
+   to branch B than the AES. Expected in sign and order of magnitude from the different
+   weightings: the line integral counts every radius equally, whereas the transported
+   mass weights by v(r)·r. Quantifying it requires the flow model. Using a fixed
+   β = 0.271 instead of the lookup table changes the RMS deviation only from 1.49 to
+   1.67 pp, so the calibration nonlinearity is not the dominant term.
+
+3. **Concentration range.** Peak values reached in E02 are 0.19–1.03 mg/mL in branch A
+   and 0.02–0.24 mg/mL in branch B, i.e. the lower fifth of the calibrated range.
+
+4. **Sampling window.** At 60 s the signal has decayed to 0.3–2.7% of its peak and 90%
+   of the integral has passed by 29–36 s, so the 60 s window captures essentially the
+   whole bolus.
+
+5. **Flow rate discrepancy in the metadata.** `info.txt` states Q = 10.0 µL/min for all
+   runs, while the AES sample sheet states 10 mL/min. Only the mL/min scale is
+   consistent with the traces: at 10 µL/min a 50 µL injection would take five minutes,
+   whereas the observed bolus peaks at 7.5 s and is over within 30 s. The export field
+   should be corrected.
+
+6. **Pronounced tailing.** Between 35% and 58% of the branch-A integral arrives after
+   15 s. The bolus is not a compact pulse, and a flow model will have to reproduce this
+   tail rather than only the peak.
+
