@@ -1,6 +1,5 @@
-# Dynano — Optisches Sensormodell für SPION-Detektion
+# Dynano
 
-Physikalisches Sensormodell und Messdaten-Pipeline für die optische Detektion von
-superparamagnetischen Eisenoxid-Nanopartikeln (SPIONs) in einem Mikrofluidikkanal.
+
 
 
