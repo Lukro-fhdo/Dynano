@@ -3,7 +3,7 @@ Grundlegende Smoke-Tests für sensor_model.py
 """
 import numpy as np
 import pytest
-from spektral_sensor.model.sensor_model import beer_lambert, fit_beta, sensor_signal, R_I
+from src.spectral_sensor.model.sensor_model import beer_lambert, fit_beta, sensor_signal, R_I
 
 
 def test_beer_lambert_zero_absorption():
