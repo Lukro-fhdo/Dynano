@@ -2,17 +2,6 @@ import pandas as pd
 import numpy as np
 
 
-def get_min(sensor_data, wavelength_nm):
-    """Liefert den kleinsten ADC-Wert je Sensor."""
-    minima = {}
-
-    for sensor_name, table in sensor_data.items():
-        values = pd.to_numeric(
-            table[str(wavelength_nm)], errors="coerce"
-        ).dropna()
-        minima[sensor_name] = values.min()
-
-    return minima
 
 
 def normalize_signal(corrected_sensors, references):

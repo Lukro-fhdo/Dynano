@@ -128,3 +128,12 @@ def read_protocol(path: Optional[Path]) -> dict[str, Any]:
         metadata["timeline_bands_nm"] = sorted(set(bands))
     return metadata
 
+def save_results(sensor_data, metrics, output_folder):
+    """Speichert Zeitreihen je Sensor und eine gemeinsame Kennwerttabelle."""
+    output_folder = Path(output_folder)
+    output_folder.mkdir(parents=True, exist_ok=True)
+
+    for sensor_name, table in sensor_data.items():
+        table.to_csv(output_folder / f"{sensor_name}.csv", index=False)
+
+    metrics.to_csv(output_folder / "metrics.csv", index=False)
