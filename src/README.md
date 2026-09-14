@@ -1,4 +1,4 @@
-— Optisches Sensormodell für SPION-Detektion
+Dynano — Optisches Sensormodell für SPION-Detektion
 
 Auswertung von Spektralsensor-Messungen an einem Mikrofluidikkanal.
 Der bisherige `spectral_experiment_analyzer.py` wird schrittweise in kleine,
