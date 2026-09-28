@@ -1,3 +1,5 @@
+import pandas as pd
+
 def synchronize_time(sensor_data, markers):
     """Ergänzt eine gemeinsame Zeitachse in Sekunden.
 
@@ -45,3 +47,39 @@ def select_time_window(synced_sensors, start_s, window_s):
 def marker_time(markers, marker_num):
     """Gibt die Markerzeit in Sekunden über den Tabellenindex zurück."""
     return float(markers.loc[marker_num, "time_s"])
+
+def synchronize_measurements(sensor_data, marker_data):
+    """Align each measurement series with its own marker timestamps."""
+    synced_sensors = {}
+    synced_markers = {}
+
+    for name, table in sensor_data.items():
+        sensors, markers, _ = synchronize_time(
+            {name: table},
+            marker_data[name],
+        )
+        synced_sensors[name] = sensors[name]
+        synced_markers[name] = markers
+
+    return synced_sensors, synced_markers
+
+def assign_markers(marker_data, label_assignment):
+    """Attach supplied metadata to matching marker labels."""
+    rows = []
+
+    for sensor_name, markers in marker_data.items():
+        for marker_index, marker in markers.iterrows():
+            label = str(marker["label"]).strip()
+
+            if label not in label_assignment:
+                continue
+
+            rows.append({
+                "sensor": sensor_name,
+                "marker_index": marker_index,
+                "label": label,
+                "start_s": marker["time_s"],
+                **label_assignment[label],
+            })
+
+    return pd.DataFrame(rows)

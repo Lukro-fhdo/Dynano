@@ -1,15 +1,19 @@
-# 1 Sensor calibration
-
-To get an estimated concentration estimation, we calibrate the used sensors to our SPION charge. we use citrate SPIONS with $c = 5.0\ mg\ mL^{-1}$ with citrate coating. Therefore concentration probes of 0, 2.5 5, 10, 15, 25, 50, 75 and 100% were produced as a mixture of Distilled water and SPION suspension. 
-
-After thermal stabilization time of $t = 15\ min$ a suspension sample of 0.5 mL is injected into the air fillid tube. The resulting suspension bolus is surrounded by air to make it movable by a syringe and prevent mixing of the concentration samples. Each concentration is measured 60 seconds and reapeated three times. This measurement protocol for sensor calibration on the SPIONs concentration is applied to all three sensors available.
-
-All three Sensors are calibrated once. applied to the same tube of 500 mm with equal distance. thus an volume of $V = 500 \cdot \pi \cdot 1,585^2 $
+# 1 Multispectral Sensor Characterization Using SPION Concentration Series — Experiment Report
 
 
-# Calibration Sample Preparation: SPION Dilution Series
+This experiment characterizes the signal responses of three physical multispectral sensors to citrate-coated SPION suspensions of known nominal iron concentration. The objective is to compare sensor responses and measurement repeatability across eight concentration levels prepared from stock suspension charge XL004 with an iron concentration of 5 mg Fe/mL.
 
-## Materials
+
+# Materials and Methods
+
+
+### Sample Preparation and Handling
+
+A dilution series was prepared from citrate-coated SPION stock suspension (batch XL004, iron concentration 5 mg Fe/mL) using distilled water. The preparation volumes and nominal iron concentrations are listed in the dilution table.
+
+The suspensions were stored for 2 h at a room temperature of 21 °C and kept in closed culture tubes to limit evaporation. The tubes were briefly shaken before measurement to redisperse the suspensions.
+
+### Materials
 
 - **SPION Stock**: Citrate-coated, c = 5.0 mg/mL, charge = XL004
 - **Diluent**: Distilled water (H₂O dist.)
@@ -18,7 +22,7 @@ All three Sensors are calibrated once. applied to the same tube of 500 mm with e
 
 ---
 
-## Pipetting Scheme
+### Pipetting Scheme
 
 
 | Sample | Concentration | V(SPION) [µL] | V(H₂O) [µL] | c(final) [mg/mL] | ✓ |
@@ -35,52 +39,54 @@ All three Sensors are calibrated once. applied to the same tube of 500 mm with e
 
 ---
 
-## Protocol
 
-
-### Preparation
-
-1. Label **8 Eppendorf tubes (2 mL)**: C000, C002, C005, C010, C025, C050, C075, C100
-3. Calibrate pipettes: 1000 µL, 200 µL, 50 µL
-
-### Pipetting
-
-**Order**: C000 → C100 (ascending, contamination minimization)
-
-4. **C000**: 2000 µL H₂O dist.
-5. **C002**: 1950 µL H₂O + 50 µL SPION
-6. **C005**: 1900 µL H₂O + 100 µL SPION
-7. **C010**: 1800 µL H₂O + 200 µL SPION
-8. **C025**: 1500 µL H₂O + 500 µL SPION
-9. **C050**: 1000 µL H₂O + 1000 µL SPION
-10. **C075**: 500 µL H₂O + 1500 µL SPION
-11. **C100**: 2000 µL SPION (stock undiluted)
-
-
-## Material Consumption (Total)
+### Material Consumption (Total)
 
 - **SPION Stock**: 7.25 mL
 - **H₂O dist.**: 8.75 mL
 - **Tubes**: 8 × 2 mL
 
 
-## Results — Sensor Calibration
+## Experimental Setup
+
+### Material
+
+
+Measurements were performed using tubing with a length of 500 mm and an internal diameter of 3.17 mm. A separate measurement series was acquired for each physical sensor to avoid potential optical interference caused by light coupling between sensors through the tubing material.
+
+
+### Measurement Procedure
+
+Each sensors were running a 15 minute warum-up for thermal stabilisation befor the measurement series. For each concentration, a 0.5 mL sample bolus was introduced into the air-filled tubing and manually moved into the sensing region and withdrawn using a syringe. This procedure was repeated three times using the same sample. Care was taken to avoid bubble formation within the suspension.
+
+Each repetition was recorded for at least 60 s. Sample positioning was manual and was not synchronized to an exact second; recorded markers were used to select the analysis windows.
+
+## Data Analysis
+
+The 640 nm channel was evaluated using a 57 s window starting at each assigned calibration marker, including the window start and excluding its end. The arithmetic mean ADC signal was calculated separately for each window. The three window means at each concentration were then summarized by their arithmetic mean and sample standard deviation, with equal weighting of the repetitions.
+
+The repetitions represent repeated positioning and measurement of the same sample, rather than independently prepared samples. Their standard deviation describes the observed variability between these measurements and does not quantify uncertainty from dilution preparation. No baseline correction or reference normalization was applied.
+
+# Results
 
 Concentration series of a 5 mg/mL SPION stock, three sensors, three replicates per
 level, 640 nm, 25 ms integration time. Intensities in ADC counts.
 
-### Table 1 — Calibration series, group means
+Source: `calibration_summary_640nm.csv`,`calibration_window_statistics_640nm.csv`.
 
-| Level | c [mg/mL] | S0 mean ± SD | S0 CV | S1 mean ± SD | S1 CV | S2 mean ± SD | S2 CV |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| `H20` | 0.000 | 6175.8 ± 25.2 | 0.41% | 6807.3 ± 37.0 | 0.54% | 5772.1 ± 31.5 | 0.55% |
-| `C002` | 0.125 | 5095.3 ± 9.3 | 0.18% | 5678.2 ± 13.5 | 0.24% | 4826.3 ± 7.6 | 0.16% |
-| `C005` | 0.250 | 4450.4 ± 5.9 | 0.13% | 4970.3 ± 4.2 | 0.08% | 4245.2 ± 3.9 | 0.09% |
-| `C010` | 0.500 | 3109.0 ± 6.6 | 0.21% | 3550.7 ± 24.7 | 0.70% | 3053.4 ± 9.3 | 0.30% |
-| `C025` | 1.250 | 1277.5 ± 15.0 | 1.17% | 1467.8 ± 6.3 | 0.43% | 1272.1 ± 4.3 | 0.34% |
-| `C050` | 2.500 | 349.7 ± 2.2 | 0.64% | 420.0 ± 3.5 | 0.82% | 376.4 ± 4.4 | 1.18% |
-| `C075` | 3.750 | 158.5 ± 5.7 | 3.59% | 195.7 ± 0.9 | 0.45% | 173.7 ± 0.4 | 0.24% |
-| `C100` | 5.000 | 87.8 ± 2.9 | 3.26% | 112.5 ± 0.9 | 0.78% | 100.7 ± 0.2 | 0.22% |
+## Table 1 - Mean sensor response at 640 nm
+
+| Iron concentration [mg Fe/mL] | Sensor 0 [ADC counts] | Sensor 1 [ADC counts] | Sensor 2 [ADC counts] |
+|---:|---:|---:|---:|
+| 0.000 | 6175.8 ± 25.2 | 6807.3 ± 37.0 | 5772.1 ± 31.5 |
+| 0.125 | 5095.3 ± 9.3 | 5678.2 ± 13.5 | 4826.3 ± 7.6 |
+| 0.250 | 4450.4 ± 5.9 | 4970.3 ± 4.2 | 4245.2 ± 3.9 |
+| 0.500 | 3109.0 ± 6.6 | 3550.7 ± 24.7 | 3053.4 ± 9.3 |
+| 1.250 | 1277.5 ± 15.0 | 1467.8 ± 6.3 | 1272.1 ± 4.3 |
+| 2.500 | 349.7 ± 2.2 | 420.0 ± 3.5 | 376.4 ± 4.4 |
+| 3.750 | 158.5 ± 5.7 | 195.7 ± 0.9 | 173.7 ± 0.4 |
+| 5.000 | 87.8 ± 2.9 | 112.5 ± 0.9 | 100.7 ± 0.2 |
+
 
 ### Table 2 — Normalised transmission I/I₀
 
@@ -120,31 +126,45 @@ level, 640 nm, 25 ms integration time. Intensities in ADC counts.
 | `C075` | S0 | 152.1 | 160.6 | 162.9 | 10.8 | 6.82% |
 | `C075` | S1 | 194.9 | 196.6 | 195.5 | 1.7 | 0.88% |
 | `C075` | S2 | 173.4 | 174.2 | 173.5 | 0.7 | 0.43% |
-| `C100` | S0 | 85.9 | 91.1 ⚠ | 86.3 | 5.2 | 5.89% |
+| `C100` | S0 | 85.9 | 91.1 | 86.3 | 5.2 | 5.89% |
 | `C100` | S1 | 111.5 | 113.1 | 112.8 | 1.6 | 1.45% |
 | `C100` | S2 | 100.6 | 100.5 | 100.9 | 0.4 | 0.40% |
 
-### Table 4 — Apparent β per concentration interval
 
-Single-beam Beer-Lambert evaluated between adjacent levels. A constant material
-β would make these columns flat.
+![Mean sensor response at 640 nm versus iron concentration](E01_sensor_calibration/results/figures/sensor_response_comparison_640nm.png)
 
-| Interval | Δc [mg/mL] | S0 | S1 | S2 |
-|---|---:|---:|---:|---:|
-| `H20`→`C002` | 0.125 | 0.4854 | 0.4577 | 0.4516 |
-| `C002`→`C005` | 0.125 | 0.3415 | 0.3361 | 0.3238 |
-| `C005`→`C010` | 0.250 | 0.4526 | 0.4244 | 0.4158 |
-| `C010`→`C025` | 0.750 | 0.3741 | 0.3716 | 0.3683 |
-| `C025`→`C050` | 1.250 | 0.3270 | 0.3158 | 0.3073 |
-| `C050`→`C075` | 1.250 | 0.1997 | 0.1927 | 0.1952 |
-| `C075`→`C100` | 1.250 | 0.1492 | 0.1397 | 0.1377 |
+**Figure 1.** Mean sensor response at 640 nm versus nominal iron concentration for the three physical sensors. Each point represents the arithmetic mean of three window means obtained from repeated positioning of the same sample.
 
-| Cumulative from `H20` | c [mg/mL] | S0 | S1 | S2 |
-|---|---:|---:|---:|---:|
-| → `C002` | 0.125 | 0.4854 | 0.4577 | 0.4516 |
-| → `C005` | 0.250 | 0.4134 | 0.3969 | 0.3877 |
-| → `C010` | 0.500 | 0.4330 | 0.4106 | 0.4018 |
-| → `C025` | 1.250 | 0.3977 | 0.3872 | 0.3817 |
-| → `C050` | 2.500 | 0.3623 | 0.3515 | 0.3445 |
-| → `C075` | 3.750 | 0.3081 | 0.2986 | 0.2947 |
-| → `C100` | 5.000 | 0.2684 | 0.2589 | 0.2555 |
+# Discussion and Limitations
+
+All three sensors showed a monotonic decrease in mean ADC signal with increasing iron concentration over the investigated range of 0–5 mg Fe/mL. The response was nonlinear, with progressively smaller absolute signal changes at higher concentrations. Sensor 1 produced the highest mean signal at every concentration. The differences between sensors indicate that a common conversion from ADC signal to concentration should not be assumed without further evaluation. 
+
+The standard deviations in Table 1 describe the variation between three repeated measurements of the same sample. All repetitions were retained. These measurements include variability associated with manual sample repositioning, but do not quantify uncertainty from inde pendent sample preparation orthe stock concentration.
+
+Each sensor was investigated in one separately acquired measurement series. Sensor-specific differences therefore cannot be fully separated from changes in measurement conditions between series. Long-term stability and between-day repeatability were not assessed.
+
+The reported concentrations are nominal values calculated from the stock concentration and dilution volumes. No independent measurement of the prepared concentrations was performed within this analysis. The observed reduction in ADC signal characterizes the response of the complete optical setup. It does not by itself establish an intrinsic absorption coefficient of the suspension.
+
+# Conclusion
+
+The three multispectral sensors exhibited a consistent concentration-dependent decrease in their 640 nm signals for SPION suspensions with nominal iron concentrations between 0 and 5 mg Fe/mL. The measurement series provides sensor-specific response data and estimates of repeatability under manual sample repositioning.
+
+These results provide a basis for subsequent sensor-response modeling. A validated conversion from ADC signal to iron concentration requires model fitting and evaluation using additional measurements. It is not established by the present characterization alone. 
+
+Given the observed differences between sensor responses, sensor-specific calibration should be considered. Its validity should be checked for each subsequent measurement series before using the fitted model to estimate concentration.
+
+# Corresponding Data
+
+The analysis and supporting files are stored in the project repository. Physical sensor identities are assigned through the measurement-series directories; the recorded software sensor ID is 1000 in all three series.
+
+| Resource | Location |
+|---|---|
+| Sensor 0 raw data, markers, and protocol | [Sensor 0 measurement series](E01_sensor_calibration/data/Sensor0_Messung_20260421_103826/) |
+| Sensor 1 raw data, markers, and protocol | [Sensor 1 measurement series](E01_sensor_calibration/data/Sensor1_Messung_20260421_124824/) |
+| Sensor 2 raw data, markers, and protocol | [Sensor 2 measurement series](E01_sensor_calibration/data/Sensor2_Messung_20260421_142354/) |
+| Analysis notebook | [sensor_calibration.ipynb](../notebooks/sensor_calibration.ipynb) |
+| Individual window statistics | [calibration_window_statistics_640nm.csv](E01_sensor_calibration/results/calibration_window_statistics_640nm.csv) |
+| Summary across repetitions | [calibration_summary_640nm.csv](E01_sensor_calibration/results/calibration_summary_640nm.csv) |
+| Sensor comparison figure, vector format | [sensor_response_comparison_640nm.pdf](E01_sensor_calibration/results/figures/sensor_response_comparison_640nm.pdf) |
+
+The CSV files retain the numerical precision of the exported results. Values in the report are rounded for presentation. Raw measurement files remain unchanged.
