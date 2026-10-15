@@ -2,79 +2,80 @@ TECHNICAL INFORMATION
 =====================
 Experiment: E02_C20x15_50%_static_test
 Batch: XL004
-Source folder: /Users/lukaskroll/Documents/10_Projekte/Versuche/ist_injection_strategie/Data/E02_20x15_50%_static_20260708
+Protocol start: 2026-07-08T13:01:43.977864
+Source folder: /Users/lukaskroll/Documents/10_Projekte/dynano/sensor_modell/experiments/E02_20x15_mag_steering/data
 Wavelength: 640 nm
-Sample window: 0 to 60 s after injection
+Sample window: 0 <= t < 60 s after injection
 Baseline: median of 10 s before each injection
 
 SENSOR / OUTLET MAPPING
-=======================
-1001: upstream, Outlet A
-1000: downstream, Outlet B
-1002: reference sensor, no outlet assignment
+======================
+A: sensor_1, software ID 1001
+B: sensor_2, software ID 1000
+Ref: sensor_0, software ID 1002
 
 100 % REFERENCE
 ===============
-Method: absolute_min
-Reference injection: STEP_6
-Search offset: 0 s
-Search window: None
-Search end: STEP_8
-I_100%,A=114 ADC; t_min,A=9.902 s; sensor=1001 (Branch A)
-I_100%,B=69 ADC; t_min,B=9.829 s; sensor=1000 (Branch B)
-I_100%,Ref=63 ADC; t_min,Ref=4.103 s; sensor=1002 (Reference)
+Method: absolute minimum within the selected reference window
+Reference values are shared across injections.
+Times below are relative to the reference window start.
+A: reference=114 ADC; window minimum=114 ADC; time of minimum=9.902 s
+B: reference=69 ADC; window minimum=69 ADC; time of minimum=9.829 s
+Ref: reference=63 ADC; window minimum=63 ADC; time of minimum=4.103 s
 
 BASELINES PER SAMPLE
 ====================
-E02_50R_AB_1: I_Baseline,A=7616 ADC, I_Baseline,B=5492 ADC, I_Baseline,Ref=6129 ADC
-E02_50R_AB_2: I_Baseline,A=7594 ADC, I_Baseline,B=5488 ADC, I_Baseline,Ref=6099 ADC
-E02_50R_AB_3: I_Baseline,A=7594 ADC, I_Baseline,B=5492 ADC, I_Baseline,Ref=6078 ADC
-E02_50_AB_1: I_Baseline,A=7588 ADC, I_Baseline,B=5491 ADC, I_Baseline,Ref=6068 ADC
-E02_50_AB_2: I_Baseline,A=7559 ADC, I_Baseline,B=5484 ADC, I_Baseline,Ref=6038 ADC
-E02_50_AB_3: I_Baseline,A=7561 ADC, I_Baseline,B=5486 ADC, I_Baseline,Ref=6030 ADC
-E02_100_AB_1: I_Baseline,A=7548 ADC, I_Baseline,B=5482 ADC, I_Baseline,Ref=6004 ADC
-E02_100_AB_2: I_Baseline,A=7544 ADC, I_Baseline,B=5484 ADC, I_Baseline,Ref=6066 ADC
-E02_100_AB_3: I_Baseline,A=7524 ADC, I_Baseline,B=5472 ADC, I_Baseline,Ref=6040 ADC
-E02_150_AB_1: I_Baseline,A=7478 ADC, I_Baseline,B=5462 ADC, I_Baseline,Ref=6032 ADC
-E02_150_AB_2: I_Baseline,A=7479 ADC, I_Baseline,B=5455 ADC, I_Baseline,Ref=6022 ADC
-E02_150_AB_3: I_Baseline,A=7475 ADC, I_Baseline,B=5451 ADC, I_Baseline,Ref=6013 ADC
+E02_50R_AB_1: A=7616 ADC, B=5492 ADC, Ref=6129 ADC
+E02_50R_AB_2: A=7594 ADC, B=5488 ADC, Ref=6099 ADC
+E02_50R_AB_3: A=7594 ADC, B=5492 ADC, Ref=6078 ADC
+E02_50_AB_1: A=7588 ADC, B=5491 ADC, Ref=6068 ADC
+E02_50_AB_2: A=7559 ADC, B=5484 ADC, Ref=6038 ADC
+E02_50_AB_3: A=7561 ADC, B=5486 ADC, Ref=6030 ADC
+E02_100_AB_1: A=7548 ADC, B=5482 ADC, Ref=6004 ADC
+E02_100_AB_2: A=7544 ADC, B=5484 ADC, Ref=6066 ADC
+E02_100_AB_3: A=7524 ADC, B=5472 ADC, Ref=6040 ADC
+E02_150_AB_1: A=7478 ADC, B=5462 ADC, Ref=6032 ADC
+E02_150_AB_2: A=7479 ADC, B=5455 ADC, Ref=6022 ADC
+E02_150_AB_3: A=7475 ADC, B=5451 ADC, Ref=6013 ADC
 
 SIGNALS AND FORMULAS
 ====================
-raw_X(t) = measured intensity I_X(t) [ADC]
-abs_X(t) = I_Baseline,X - raw_X(t) [ADC]
-norm_X(t) = abs_X(t) / (I_Baseline,X - I_100%,X) [-]
-X is A, B or Ref.
+raw_X(t) = measured intensity I_X(t) [ADC counts]
+abs_X(t) = baseline_X - raw_X(t) [ADC counts]
+norm_X(t) = abs_X(t) / (baseline_X - reference_X) [-]
+X is A, B, or Ref.
+Normalized signal change is not a concentration estimate.
 
 CSV COLUMNS
 ===========
-t_A, raw_A, abs_A, norm_A: Sensor 1001, upstream, Outlet A
-t_B, raw_B, abs_B, norm_B: Sensor 1000, downstream, Outlet B
-t_Ref, raw_Ref, abs_Ref, norm_Ref: Sensor 1002, reference
-Time columns are seconds after the injection marker.
-Signal columns raw/abs are ADC counts; norm is dimensionless.
-Each sensor retains its own original time vector; no interpolation is applied.
-Separator: comma; decimal: point; encoding: UTF-8
+t_A,raw_A,abs_A,norm_A,t_B,raw_B,abs_B,norm_B,t_Ref,raw_Ref,abs_Ref,norm_Ref
+Time columns: seconds after the injection marker.
+Each sensor retains its original time vector; no interpolation.
+Shorter columns are padded with empty fields.
+Separator: comma; decimal: point; encoding: UTF-8.
+No row index is exported.
 
 PLOT RECONSTRUCTION
 ===================
-Raw plot: plot raw_X against t_X.
-Absolute plot: plot abs_X against t_X.
-Normalized plot: plot norm_X against t_X.
+Raw signal: raw_X versus t_X.
+Baseline-corrected signal: abs_X versus t_X.
+Normalized signal: norm_X versus t_X.
 
 SAMPLES
 =======
-E02_50R_AB_1 | STEP_8 | rep 1 | V=50.0 uL | Q=10.0 uL/min | magnet=off | source labels: E02_50R_A_1, E02_50R_B_1 | E02_50R_AB_1.csv
-E02_50R_AB_2 | STEP_9 | rep 2 | V=50.0 uL | Q=10.0 uL/min | magnet=off | source labels: E02_50R_A_2, E02_50R_B_2 | E02_50R_AB_2.csv
-E02_50R_AB_3 | STEP_10 | rep 3 | V=50.0 uL | Q=10.0 uL/min | magnet=off | source labels: E02_50R_A_3, E02_50R_B_3 | E02_50R_AB_3.csv
-E02_50_AB_1 | STEP_13 | rep 1 | V=50.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_50_A_1, E02_50_B_1 | E02_50_AB_1.csv
-E02_50_AB_2 | STEP_14 | rep 2 | V=50.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_50_A_2, E02_50_B_2 | E02_50_AB_2.csv
-E02_50_AB_3 | STEP_15 | rep 3 | V=50.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_50_A_3, E02_50_B_3 | E02_50_AB_3.csv
-E02_100_AB_1 | STEP_16 | rep 1 | V=100.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_100_A_1, E02_100_B_1 | E02_100_AB_1.csv
-E02_100_AB_2 | STEP_17 | rep 2 | V=100.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_100_A_2, E02_100_B_2 | E02_100_AB_2.csv
-E02_100_AB_3 | STEP_18 | rep 3 | V=100.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_100_A_3, E02_100_B_3 | E02_100_AB_3.csv
-E02_150_AB_1 | STEP_19 | rep 1 | V=150.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_150_A_1, E02_150_B_1 | E02_150_AB_1.csv
-E02_150_AB_2 | STEP_20 | rep 2 | V=150.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_150_A_2, E02_150_B_2 | E02_150_AB_2.csv
-E02_150_AB_3 | STEP_21 | rep 3 | V=150.0 uL | Q=10.0 uL/min | magnet=on | source labels: E02_150_A_3, E02_150_B_3 | E02_150_AB_3.csv
+Marker labels are retained as recorded.
+Injection-rate units in marker labels have not been verified.
+E02_50R_AB_1 | marker index=7 | rep=1 | V=50 µL | magnet=off | STEP_8: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50R_AB_1.csv
+E02_50R_AB_2 | marker index=8 | rep=2 | V=50 µL | magnet=off | STEP_9: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50R_AB_2.csv
+E02_50R_AB_3 | marker index=9 | rep=3 | V=50 µL | magnet=off | STEP_10: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50R_AB_3.csv
+E02_50_AB_1 | marker index=12 | rep=1 | V=50 µL | magnet=on | STEP_13: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50_AB_1.csv
+E02_50_AB_2 | marker index=13 | rep=2 | V=50 µL | magnet=on | STEP_14: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50_AB_2.csv
+E02_50_AB_3 | marker index=14 | rep=3 | V=50 µL | magnet=on | STEP_15: Inject syringe 50.0 ul @ 10.0 ul/min | E02_50_AB_3.csv
+E02_100_AB_1 | marker index=15 | rep=1 | V=100 µL | magnet=on | STEP_16: Inject syringe 100.0 ul @ 10.0 ul/min | E02_100_AB_1.csv
+E02_100_AB_2 | marker index=16 | rep=2 | V=100 µL | magnet=on | STEP_17: Inject syringe 100.0 ul @ 10.0 ul/min | E02_100_AB_2.csv
+E02_100_AB_3 | marker index=17 | rep=3 | V=100 µL | magnet=on | STEP_18: Inject syringe 100.0 ul @ 10.0 ul/min | E02_100_AB_3.csv
+E02_150_AB_1 | marker index=18 | rep=1 | V=150 µL | magnet=on | STEP_19: Inject syringe 150.0 ul @ 10.0 ul/min | E02_150_AB_1.csv
+E02_150_AB_2 | marker index=19 | rep=2 | V=150 µL | magnet=on | STEP_20: Inject syringe 150.0 ul @ 10.0 ul/min | E02_150_AB_2.csv
+E02_150_AB_3 | marker index=20 | rep=3 | V=150 µL | magnet=on | STEP_21: Inject syringe 150.0 ul @ 10.0 ul/min | E02_150_AB_3.csv
 
 Exported CSV files: 12

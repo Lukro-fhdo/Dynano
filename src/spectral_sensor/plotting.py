@@ -24,7 +24,7 @@ def plot_timeseries(
             table[time_column],
             table[signal_column],
             color=style.get("color"),
-            label=sensor_name,
+            label=style.get("label", sensor_name),
         )
     
     ax.set_xlabel(xlabel)

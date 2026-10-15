@@ -46,6 +46,19 @@ The suspensions were stored for 2 h at a room temperature of 21 °C and kept in 
 - **H₂O dist.**: 8.75 mL
 - **Tubes**: 8 × 2 mL
 
+### Sensor settings
+
+The sensors were operated at the following settings, based on findings for optimal SNR in [1]
+
+| Parameter | Value |
+|---|---:|
+| ATIME | 0 |
+| ASTEP | 8993 |
+| GAIN | 1 |
+| IRMAIN | 25 |
+| IROPP | 25 |
+| VISM | 255 |
+| VISLR | 255 |
 
 ## Experimental Setup
 
@@ -168,3 +181,7 @@ The analysis and supporting files are stored in the project repository. Physical
 | Sensor comparison figure, vector format | [sensor_response_comparison_640nm.pdf](E01_sensor_calibration/results/figures/sensor_response_comparison_640nm.pdf) |
 
 The CSV files retain the numerical precision of the exported results. Values in the report are rounded for presentation. Raw measurement files remain unchanged.
+
+## References
+
+[1] L. Kroll, A. Hemmis, J. Thiem, S. Lyer, and J. Kirchner, “Multispectral Optical Sensor Architecture for SPION Detection in Fluidic Testbeds,” manuscript, 2026.

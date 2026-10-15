@@ -137,3 +137,159 @@ def save_results(sensor_data, metrics, output_folder):
         table.to_csv(output_folder / f"{sensor_name}.csv", index=False)
 
     metrics.to_csv(output_folder / "metrics.csv", index=False)
+
+def export_injection(sensor_data, sensor_roles, wavelength_nm, path):
+    """Save sensor signals side by side, retaining individual time vectors."""
+    columns = {
+        "time_from_start_s": "t",
+        str(wavelength_nm): "raw",
+        "absorption_adc": "abs",
+        "normalized_0_1": "norm",
+    }
+
+    tables = []
+
+    for sensor, role in sensor_roles.items():
+        table = sensor_data[sensor][list(columns)].copy()
+        table = table.reset_index(drop=True)
+        table.columns = [
+            f"{name}_{role}" for name in columns.values()
+        ]
+        tables.append(table)
+
+    exported = pd.concat(tables, axis=1)
+
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    exported.to_csv(path, index=False)
+
+def export_injection_info(
+    normalized_injections,
+    injections,
+    sensor_roles,
+    protocol_metadata,
+    reference_window,
+    data_dir,
+    wavelength_nm,
+    window_s,
+    baseline_window_s,
+    path,
+):
+    """Document metadata, references, baselines, and exported samples."""
+    first_injection = next(iter(normalized_injections.values()))
+
+    lines = [
+        "TECHNICAL INFORMATION",
+        "=====================",
+        f"Experiment: {protocol_metadata['experiment_name']}",
+        f"Batch: {protocol_metadata['batch_number']}",
+        f"Protocol start: {protocol_metadata['start_time']}",
+        f"Source folder: {data_dir}",
+        f"Wavelength: {wavelength_nm} nm",
+        f"Sample window: 0 <= t < {window_s:g} s after injection",
+        f"Baseline: median of {baseline_window_s:g} s before each injection",
+        "",
+        "SENSOR / OUTLET MAPPING",
+        "======================",
+    ]
+
+    for sensor, role in sensor_roles.items():
+        software_id = first_injection[sensor]["sensor"].iloc[0]
+        lines.append(
+            f"{role}: {sensor}, software ID {software_id}"
+        )
+
+    lines.extend([
+        "",
+        "100 % REFERENCE",
+        "===============",
+        "Method: absolute minimum within the selected reference window",
+        "Reference values are shared across injections.",
+        "Times below are relative to the reference window start.",
+    ])
+
+    for sensor, role in sensor_roles.items():
+        table = reference_window[sensor]
+        signal = pd.to_numeric(
+            table[str(wavelength_nm)], errors="coerce"
+        ).dropna()
+        minimum_index = signal.idxmin()
+        minimum_time = table.loc[minimum_index, "time_from_start_s"]
+        reference = first_injection[sensor]["reference_adc_100pct"].iloc[0]
+
+        lines.append(
+            f"{role}: reference={reference:g} ADC; "
+            f"window minimum={signal.min():g} ADC; "
+            f"time of minimum={minimum_time:.3f} s"
+        )
+
+    lines.extend([
+        "",
+        "BASELINES PER SAMPLE",
+        "====================",
+    ])
+
+    samples = []
+
+    for injection in injections.itertuples(index=False):
+        condition = (
+            f"{injection.volume_ul}R"
+            if injection.magnet == "off"
+            else str(injection.volume_ul)
+        )
+        name = f"E02_{condition}_AB_{injection.replicate}"
+        sensors = normalized_injections[injection.marker_index]
+
+        baselines = [
+            f"{role}={sensors[sensor]['baseline_adc'].iloc[0]:g} ADC"
+            for sensor, role in sensor_roles.items()
+        ]
+        lines.append(f"{name}: " + ", ".join(baselines))
+
+        samples.append(
+            f"{name} | marker index={injection.marker_index} | "
+            f"rep={injection.replicate} | "
+            f"V={injection.volume_ul:g} µL | "
+            f"magnet={injection.magnet} | "
+            f"{injection.label} | {name}.csv"
+        )
+
+    lines.extend([
+        "",
+        "SIGNALS AND FORMULAS",
+        "====================",
+        "raw_X(t) = measured intensity I_X(t) [ADC counts]",
+        "abs_X(t) = baseline_X - raw_X(t) [ADC counts]",
+        "norm_X(t) = abs_X(t) / (baseline_X - reference_X) [-]",
+        "X is A, B, or Ref.",
+        "Normalized signal change is not a concentration estimate.",
+        "",
+        "CSV COLUMNS",
+        "===========",
+        "t_A,raw_A,abs_A,norm_A,"
+        "t_B,raw_B,abs_B,norm_B,"
+        "t_Ref,raw_Ref,abs_Ref,norm_Ref",
+        "Time columns: seconds after the injection marker.",
+        "Each sensor retains its original time vector; no interpolation.",
+        "Shorter columns are padded with empty fields.",
+        "Separator: comma; decimal: point; encoding: UTF-8.",
+        "No row index is exported.",
+        "",
+        "PLOT RECONSTRUCTION",
+        "===================",
+        "Raw signal: raw_X versus t_X.",
+        "Baseline-corrected signal: abs_X versus t_X.",
+        "Normalized signal: norm_X versus t_X.",
+        "",
+        "SAMPLES",
+        "=======",
+        "Marker labels are retained as recorded.",
+        "Injection-rate units in marker labels have not been verified.",
+        *samples,
+        "",
+        f"Exported CSV files: {len(injections)}",
+    ])
+
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")

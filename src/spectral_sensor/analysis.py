@@ -82,3 +82,36 @@ def get_integral(
         })
 
     return pd.DataFrame(results)
+
+def injection_metrics(sensor_data):
+    """Calculate signal metrics for one injection, indexed by sensor."""
+    metrics = get_peak(
+        sensor_data, "time_from_start_s", "absorption_adc"
+    ).set_index("sensor").rename(columns={
+        "peak_value": "peak_absolute_adc",
+    })
+
+    metrics["peak_normalized"] = get_peak(
+        sensor_data, "time_from_start_s", "normalized_0_1"
+    ).set_index("sensor")["peak_value"]
+
+    for name, signal, positive_only in [
+        ("integral_absolute_adc_s", "absorption_adc", False),
+        ("integral_positive_adc_s", "absorption_adc", True),
+        ("integral_normalized_s", "normalized_0_1", False),
+    ]:
+        metrics[name] = get_integral(
+            sensor_data,
+            "time_from_start_s",
+            signal,
+            positive_only=positive_only,
+        ).set_index("sensor")["integral"]
+
+    for sensor, table in sensor_data.items():
+        signal = table["absorption_adc"]
+        metrics.loc[sensor, "n_points"] = len(table)
+        metrics.loc[sensor, "mean_absolute_adc"] = signal.mean()
+        metrics.loc[sensor, "std_absolute_adc"] = signal.std()
+
+    metrics["n_points"] = metrics["n_points"].astype(int)
+    return metrics
