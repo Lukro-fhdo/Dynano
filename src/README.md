@@ -58,25 +58,3 @@ Messzeiten; `positive_only=True` setzt negative Signalwerte vorher auf null.
 Ungültige Zeit-Signal-Paare werden entfernt, verbleibende Punkte auch über
 Messlücken hinweg verbunden. Bei weniger als zwei gültigen Punkten wird 0 geliefert.
 
-## Nachvollziehbarkeit und offene Punkte
-
-- Dateipfade, Einstellungen und Referenzauswahl zentral im Notebook festhalten.
-  `read_protocol` liest Dateiname, Experimentname, Batch, Startzeit und
-  Wellenlängen aus `Protocol.md`; nicht den gesamten Versuchsablauf.
-- Der CSV-Export speichert noch keine separate Metadatendatei. Vorhandene
-  gleichnamige Ergebnisdateien werden überschrieben.
-- Die automatische Suche verwendet `Spectralsensor`, vorhandene Dateien heißen
-  `SpectralSensor`. Vorerst ausdrücklich angegebene Dateipfade verwenden.
-- Der gemeldete Versatz von Sensor 3 trat im Zeitfensterplot auf; der Rohdatenplot
-  war plausibel. Die Ursache ist noch nicht bestätigt. Nächster Schritt ist ein
-  vollständiger Notebook-Durchlauf für eine konkrete Messung, mit Prüfung der
-  Zeitachsen direkt nach der Fensterauswahl.
-- Nach Änderungen an Modulen diese vor dem erneuten Berechnen laden. Bereits
-  berechnete Tabellen ändern sich durch `reload()` nicht. Für den Abschluss:
-  Kernel neu starten und alle Zellen von oben nach unten ausführen.
-- Eine vollständige numerische Gleichheit mit dem bisherigen Analyzer ist noch
-  nicht belegt. Weitere Kalibrations- und Replikatfunktionen sind nicht übertragen.
-
-Abhängigkeiten: `requirements.txt`; `get_integral` benötigt wegen
-`np.trapezoid` NumPy ab 2.0. Die bisherigen Notebook-Imports verwenden
-`src.spectral_sensor`; dafür muss der Projektordner im Python-Suchpfad liegen.
