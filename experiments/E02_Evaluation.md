@@ -361,42 +361,42 @@ the peak concentration drops to 0.70× while the integral rises to 1.41×, and
 t50 shifts from 14.6 s to 17.0 s. More material arrives, later and more spread out —
 consistent with temporary retention at the magnet followed by gradual release.
 
-![Sensor vs AES](E02_20x15_mag_steering/sensor_vs_aes.png)
 
-*Figure 1. (a) Recovered concentration traces, 50 µL replicate 2, magnet off (dashed)
-and on (solid). (b) Sensor against AES branch-B share, all 12 runs, with the 1:1 line.
-(c) Branch-B share per condition from both methods, error bars are replicate SD.*
+## Branch Distribution: Optical Sensors and AES
 
-### Notes
+For each sensor, the normalized signal change is defined as
 
-1. **The comparison independently supports the suspected sample interchange.** With the
-   AES values as recorded, the two largest deviations from the sensor are exactly
-   samples 7 and 19 (+2.6 pp and −6.6 pp), and the correlation is r = 0.968. Exchanging
-   the two A values raises it to r = 0.998 and brings both runs in line with their
-   replicates. Two independent measurement methods pointing at the same two vials is a
-   strong indication.
+$$
+s_X(t)=\frac{I_{0,X}-I_X(t)}{I_{0,X}-I_{100,X}},
+\qquad X\in\{A,B\},
+$$
 
-2. **Residual systematic of about +12%.** The sensor attributes a slightly larger share
-   to branch B than the AES. Expected in sign and order of magnitude from the different
-   weightings: the line integral counts every radius equally, whereas the transported
-   mass weights by v(r)·r. Quantifying it requires the flow model. Using a fixed
-   β = 0.271 instead of the lookup table changes the RMS deviation only from 1.49 to
-   1.67 pp, so the calibration nonlinearity is not the dominant term.
+where $I_X(t)$ is the measured intensity, $I_{0,X}$ is the median intensity during the 10 s preceding each injection, and $I_{100,X}$ is the sensor-specific reference intensity determined between STEP 6 and STEP 8.
 
-3. **Concentration range.** Peak values reached in E02 are 0.19–1.03 mg/mL in branch A
-   and 0.02–0.24 mg/mL in branch B, i.e. the lower fifth of the calibrated range.
+The normalized response is integrated over the 60 s evaluation window using trapezoidal integration:
 
-4. **Sampling window.** At 60 s the signal has decayed to 0.3–2.7% of its peak and 90%
-   of the integral has passed by 29–36 s, so the 60 s window captures essentially the
-   whole bolus.
+$$
+S_X=\int_0^{60\,\mathrm{s}}s_X(t)\,\mathrm{d}t.
+$$
 
-5. **Flow rate discrepancy in the metadata.** `info.txt` states Q = 10.0 µL/min for all
-   runs, while the AES sample sheet states 10 mL/min. Only the mL/min scale is
-   consistent with the traces: at 10 µL/min a 50 µL injection would take five minutes,
-   whereas the observed bolus peaks at 7.5 s and is over within 30 s. The export field
-   should be corrected.
+Negative signal values are retained. Optical branch shares are calculated separately for each injection:
 
-6. **Pronounced tailing.** Between 35% and 58% of the branch-A integral arrives after
-   15 s. The bolus is not a compact pulse, and a flow model will have to reproduce this
-   tail rather than only the peak.
+$$
+f_{A,\mathrm{sensor}}=\frac{S_A}{S_A+S_B},
+\qquad
+f_{B,\mathrm{sensor}}=\frac{S_B}{S_A+S_B}.
+$$
 
+
+For equal collection volumes at both outlets, AES branch shares are calculated from the measured iron concentrations:
+
+$$
+f_{A,\mathrm{AES}}=\frac{c_{\mathrm{Fe},A}}{c_{\mathrm{Fe},A}+c_{\mathrm{Fe},B}},
+\qquad
+f_{B,\mathrm{AES}}=\frac{c_{\mathrm{Fe},B}}{c_{\mathrm{Fe},A}+c_{\mathrm{Fe},B}}.
+$$
+
+Shares are reported as $100f$ in percent. Optical shares represent normalized signal contributions rather than calibrated iron mass fractions.
+![Branch shares measured by optical sensors and AES](E02_20x15_mag_steering/results/statistics/branch_share_sensor_vs_aes.png)
+
+*Figure 7. Branch A and B shares calculated from integrated normalized optical signals and AES iron concentrations for equal collection volumes. Bars show means and error bars indicate sample standard deviations across three injections per condition.*
