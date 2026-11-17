@@ -1,0 +1,38 @@
+marker_id,timestamp,label
+99,350084,STEP_1: Start sensor (upstream, downstream, reference)
+99,350328,STEP_2: Wait (20 min warum up)
+99,1577721,STEP_3: Move robot to full_off @ 1.0
+99,1578100,STEP_4: Warte auf Continue (Fill Air for ref shot)
+99,1622596,STEP_5: Inject syringe 200.0 ul @ 5.0 ul/min
+99,1684945,STEP_6: Warte auf Continue (Fill H20 for Meas.)
+99,1755097,STEP_7: Inject syringe 50.0 ul @ 5.0 ul/min
+99,1817372,STEP_8: Warte auf Continue (flushed)
+99,1903862,STEP_9: Inject syringe 50.0 ul @ 5.0 ul/min
+99,1966120,STEP_10: Warte auf Continue (flushed)
+99,2043325,STEP_11: Inject syringe 50.0 ul @ 5.0 ul/min
+99,2105711,STEP_12: Warte auf Continue (Magnet on 50 uL)
+99,2194025,STEP_13: Move robot to C20_on @ 1.0
+99,2261349,STEP_14: Warte auf Continue (batch 2)
+99,2263847,STEP_15: Inject syringe 50.0 ul @ 5.0 ul/min
+99,2326023,STEP_16: Warte auf Continue (flushed)
+99,2387443,STEP_17: Inject syringe 50.0 ul @ 5.0 ul/min
+99,2449611,STEP_18: Warte auf Continue (flushed)
+99,2518989,STEP_19: Inject syringe 50.0 ul @ 5.0 ul/min
+99,2581147,STEP_20: Warte auf Continue (Mag off 100uL)
+99,2629137,STEP_21: Move robot to full_off @ 0.55
+99,2701462,STEP_22: Warte auf Continue (batch 3)
+99,2706759,STEP_23: Inject syringe 100.0 ul @ 5.0 ul/min
+99,2769034,STEP_24: Warte auf Continue (flushed)
+99,2822597,STEP_25: Inject syringe 100.0 ul @ 5.0 ul/min
+99,2823610,STEP_26: Warte auf Continue (flushed)
+99,2953200,STEP_27: Inject syringe 100.0 ul @ 1.0 ul/min
+99,2954262,STEP_28: Warte auf Continue (Mag on 100 uL)
+99,3037490,STEP_29: Move robot to C20_on @ 1.0
+99,3104917,STEP_30: Wait (batch 4)
+99,3135521,STEP_31: Inject syringe 100.0 ul @ 5.0 ul/min
+99,3197623,STEP_32: Warte auf Continue (flushed)
+99,3271604,STEP_33: Inject syringe 100.0 ul @ 5.0 ul/min
+99,3333733,STEP_34: Warte auf Continue (flushed)
+99,3422576,STEP_35: Inject syringe 100.0 ul @ 5.0 ul/min
+99,3484685,STEP_36: Warte auf Continue (flushed)
+99,3567028,STEP_37: Stop all devices
